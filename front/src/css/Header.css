@@ -1,0 +1,31 @@
+.form-control {
+  padding: 0.4rem 0.75rem;
+  font-size: 1rem;
+  font-weight: 400;
+  color: #212529;
+  background-color: white;
+  border: 1px solid rgb(206, 212, 218);
+  border-radius: 0.25rem;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  height: 2rem;
+  width: 30rem;
+}
+
+.form-control:focus {
+  color: rgb(33, 37, 41);
+  background-color: white;
+  border-color: #F75400;
+  outline: 0;
+  box-shadow: 0.01px 0.01px 10px #F75400;
+}
+
+.cart-product::-webkit-scrollbar {
+  border: none;
+  border-radius: 10px;
+  width: 5px;
+}
+
+.cart-product::-webkit-scrollbar-thumb {
+  background-color: #F75400;
+  border-radius: 20px;
+}
