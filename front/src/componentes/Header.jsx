@@ -45,9 +45,14 @@ export default function Header () {
         </button>
       </form>
       )}
-      <div>
-        <CartPopOver />
-      </div>
+      {
+        pathname !== '/admin' && (
+          <div>
+            <CartPopOver />
+          </div>
+        )
+      }
+      
     </header>
   );
 }

@@ -30,8 +30,39 @@ const getProductByCategory = async (categoryId) => {
 	return products.map(serialize);
 };
 
+const createProduct = async ({ name, price, category, description, thumbnail }) => {
+	const [products] = await connection.execute(
+		'INSERT INTO shopping_db.product (product_name, product_price, product_description, product_img, product_category_ID) VALUES (?, ?, ?, ?, ?)',[name, price, description, thumbnail, category]
+	);
+	const resultado = {
+		id: products.insertId,
+		title: name,
+	}
+	return resultado;
+}
+
+const updateProduct = async ({ id, name, price, category, description, thumbnail }) => {
+	const [products] = await connection.execute(
+		'UPDATE shopping_db.product SET product_name = ?, product_price = ?, product_description = ?, product_img = ?, product_category_ID = ? WHERE product_id = ?',[name, price, description, thumbnail, category, id]
+	);
+	const resultado = {
+		rowsAffected: products.affectedRows,
+		title: name,
+	}
+	return resultado;
+}
+
+const deleteProduct = async (productId) => {
+	const [products] = await connection.execute(
+		'DELETE FROM shopping_db.product WHERE product_id = ?',[productId]
+	);
+} 
+
 module.exports = {
   getAll,
   getProductById,
-	getProductByCategory
+	getProductByCategory,
+	updateProduct,
+	createProduct,
+	deleteProduct
 };

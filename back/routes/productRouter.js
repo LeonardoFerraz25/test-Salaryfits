@@ -2,7 +2,7 @@ const express = require('express');
 
 const product = express.Router();
 
-const { getAll, getProductById, getProductByCategory } = require('../models/product');
+const { getAll, getProductById, getProductByCategory, createProduct, updateProduct,deleteProduct } = require('../models/product');
 
 product.get('/', async (_req, res) => {
   try {
@@ -40,5 +40,35 @@ product.get('/search/category/:id', async (req, res) => {
   }
 });
 
+product.post('/', async (req, res) => {
+  const { name, price, category, description, thumbnail } = req.body;
+  try {
+    const product = await createProduct({ name, price, category, description, thumbnail });
+    res.status(201).json(product);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+})
+
+product.put('/:id', async (req, res) => {
+  const { id } = req.params;
+  const { name, price, category, description, thumbnail } = req.body;
+  try {
+    const product = await updateProduct({ id, name, price, category, description, thumbnail });
+    res.status(200).json(product);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+})
+
+product.delete('/:id', async (req, res) => {
+  const { id } = req.params;
+  try {
+    await deleteProduct(id);
+    res.status(200).json({ message: 'product deleted' });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+})
 
 module.exports = product;
