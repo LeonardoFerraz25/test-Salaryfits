@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
 import axios from "axios";
 import getCategories from '../helpers/getCategories';
@@ -23,7 +24,7 @@ export default function Edit() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const URL = `http://localhost:3001/products/${pathname.split('/')[3]}`
+    const URL = `http://192.168.80.3:3001/products/${pathname.split('/')[3]}`
     
     axios.put(URL, {
       name,
@@ -45,7 +46,7 @@ export default function Edit() {
 
   const reqInfo = async () => {
     const id = pathname.split('/')[3];
-    const URL = `http://localhost:3001/products/${id}'`
+    const URL = `http://192.168.80.3:3001/products/${id}'`
     const { data }= await axios.get(URL);
     console.log(data);
     setName(data[0].title);
@@ -92,7 +93,7 @@ export default function Edit() {
       </h1>
       <form
         onSubmit={ handleSubmit }
-        className="flex flex-col items-center justify-center border rounded p-4 w-[60%] m-auto relative"
+        className="flex flex-col items-center justify-center border rounded p-4 w-[70%] m-auto relative mb-8"
       >
       <label
         htmlFor="title"
@@ -169,7 +170,7 @@ export default function Edit() {
             }
           </select>
         </label>
-        <div className="absolute right-16 h-[200px] w-[200px]">
+        <div className="absolute right-14 h-[200px] w-[200px]">
           <img className="w-full h-full" src={ thumbnail } alt={ name } />
         </div>
         <button

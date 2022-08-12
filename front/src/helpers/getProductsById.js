@@ -1,5 +1,5 @@
 const getProductsById = async (id) => {
-  const URL = `http://localhost:3001/products/${id}`;
+  const URL = `http://192.168.80.3:3001/products/${id}`;
 
   const product = await fetch(URL)
     .then(res => res.json())

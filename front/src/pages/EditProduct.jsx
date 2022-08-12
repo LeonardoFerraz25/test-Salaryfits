@@ -15,7 +15,7 @@ export default function EditProduct() {
 
   const deleteProduct = async (id) => {
     console.log(id);
-    const URL = `http://localhost:3001/products/${id}`;
+    const URL = `http://192.168.80.3:3001/products/${id}`;
     await axios.delete(URL);
     requestProducts();
   }
@@ -42,7 +42,9 @@ export default function EditProduct() {
               <h1
                 className="text-xl font-bold mb-8 mt-4"
               >{ product.title }</h1>
-              <p>{ product.description }</p>
+              <p
+                className="w-[80%] mb-4"
+              >{ product.description }</p>
               <p>R$: { parseFloat(product.price).toFixed(2) }</p>
               <div
                 className="absolute right-12"

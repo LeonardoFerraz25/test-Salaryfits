@@ -19,7 +19,7 @@ export default function AddProduct() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const URL = 'http://localhost:3001/products'
+    const URL = 'http://192.168.80.3:3001/products'
     
     axios.post(URL, {
       name,
@@ -35,6 +35,11 @@ export default function AddProduct() {
       console.log(error);
     });
 
+    setName('');
+    setDescription('');
+    setPrice(0);
+    setCategory('');
+    setThumbnail('');
     setIsCreated(true);    
 
   }
@@ -76,7 +81,7 @@ export default function AddProduct() {
       </h1>
       <form
         onSubmit={ handleSubmit }
-        className="flex flex-col items-center justify-center border rounded p-4 w-[60%] m-auto"
+        className="flex flex-col items-center justify-center border rounded p-4 w-[60%] m-auto mb-8"
       >
       <label
         htmlFor="title"
@@ -160,7 +165,21 @@ export default function AddProduct() {
             Adicionar
           </button>
       </form>
-      { isCreated && <h1>Produto adicionado com sucesso</h1> }
+      { isCreated && (
+      <div className="fixed top-[50vh] left-[60vh]">
+        <h1
+          className="rounded py-4 px-12 bg-green-600 text-center text-white text-4xl font-bold"
+        >
+          Produto adicionado com sucesso
+        </h1>
+        <button
+          className='absolute z-10 top-1 right-2 text-white font-bold'
+          onClick={ () => setIsCreated(false) }
+        >
+          x
+        </button>
+      </div>
+      )}
     </div>
   );
 }

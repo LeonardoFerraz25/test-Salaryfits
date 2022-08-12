@@ -1,5 +1,5 @@
 const getProducts = async () => {
-  const URL = 'http://localhost:3001/products';
+  const URL = 'http://192.168.80.3:3001/products';
 
   const products = await fetch(URL)
     .then(res => res.json())

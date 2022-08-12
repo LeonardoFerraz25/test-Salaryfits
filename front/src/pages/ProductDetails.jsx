@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import Header from '../componentes/Header';
@@ -37,15 +38,19 @@ export default function ProductDetails() {
           : (
             <div className="border borde-red-600 relative w-[60%] flex m-auto flex-col mt-12">
               <h1 className="font-bold text-lg text-center mb-2">{product[0].title}</h1>
-              <img 
-                src={product[0].thumbnail} alt={product[0].title}
-                className="w-[200px] h-[200px] mt-20 ml-20"
-              />
-              <p
-                className="text-center absolute right-32 top-32 text-gray-600 text-sm mt-4"
-              >{product[0].description}</p>
+              <div className='flex items-center justify-between w-[80%] m-auto' >
+                <img
+                  src={product[0].thumbnail} alt={product[0].title}
+                  className="w-[200px] h-[200px] mt-20 ml-20"
+                />
+                <p
+                  className="text-center text-gray-600 text-sm mt-4"
+                >
+                  {product[0].description}
+                </p>
+              </div>
               <span
-                className="text-center absolute right-32 bottom-24"
+                className="text-center absolute right-32 bottom-20"
               >R$ {parseFloat(product[0].price).toFixed(2)}</span>
               <button
                 type='button'

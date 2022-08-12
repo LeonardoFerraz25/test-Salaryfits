@@ -1,26 +1,37 @@
-version: '3'
+version: "3"
 
 services:
+  # Serviço que irá rodar o node
   back:
+    container_name: back
     depends_on:
       - db
     build: ./back
     restart: always
-    env_file: ./.env
     ports:
-      - $NODE_LOCAL_PORT:$NODE_DOCKER_PORT
+      - 3001:3000
+    # Configura as variáveis de ambiente dentro do container
+    environment:
+      MYSQL_USER: root
+      MYSQL_PASSWORD: root
+      MYSQL_HOST: db # Nome do service logo abaixo
+      NODE_PORT: '3001'
 
+  # Serviço que irá rodar o banco de dados
   db:
-    container_name: 'database-node'
-    image: mysql:5.7.31
-    command: --default-authentication-plugin=mysql_native_password --sql_mode=NO_ENGINE_SUBSTITUTION,NO_AUTO_CREATE_USER --explicit_defaults_for_timestamp
-    restart: always
-    env_file: ./.env
-    ports: 
-      - $MYSQLDB_LOCAL_PORT:$MYSQLDB_DOCKER_PORT
-    environment: 
-      - MYSQL_ROOT_PASSWORD=$MYSQLDB_ROOT_PASSWORD
-      - TZ=America/Sao_Paulo
+    container_name: db
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: 'root'
+    ports:
+      - 3306:3306
 
-volumes: 
+# Lista de redes que os containeres irão utilizar
+networks:
+  # Rede padrão, criada automaticamente
+  default:
+    # Dá um nome específico à rede padrão
+    name: store_manager_net
+
+volumes:
   db:
